@@ -121,12 +121,12 @@ function startGame() {
     }
     matrix.push(fila);
   }
-  var iter = 0;
-  while (iter < 2) {
+  var cosi = 0;
+  while (cosi < 15) {
     verificarReglaUno();
     verificarReglaDos();
     verificarReglaCuatro();
-    iter++;
+    cosi++;
   }
 }
 
@@ -187,7 +187,6 @@ function verificarReglaUno() {
         } catch (error) {}
 
         if (parseInt(matrix[i][j]) == cantidad) {
-          console.log(i + " " + j);
           if (i == 0) {
             if (!["I", "B", "0", "1", "2", "3", "4"].includes(matrix[i + 1][j]))
               insertarBombilla(i + 1, j);
@@ -366,39 +365,39 @@ function verificarReglaCuatro() {
       if (matrix[i][j] == "X") {
         var contador = 0;
         for (var a = i - 1; a >= 0; a--) {
-          if (["B", "0", "1", "2", "3", "4"].includes(matrix[a][j])) break;
+          if (esBloque(matrix[a][j])) break;
           if (matrix[a][j] == "E") contador++;
         }
         for (var a = i + 1; a < matrix.length; a++) {
-          if (["B", "0", "1", "2", "3", "4"].includes(matrix[a][j])) break;
+          if (esBloque(matrix[a][j])) break;
           if (matrix[a][j] == "E") contador++;
         }
 
         for (var a = j - 1; a >= 0; a--) {
-          if (["B", "0", "1", "2", "3", "4"].includes(matrix[i][a])) break;
-          if (matrix[a][j] == "E") contador++;
+          if (esBloque(matrix[i][a])) break;
+          if (matrix[i][a] == "E") contador++;
         }
         for (var a = j + 1; a < matrix.length; a++) {
-          if (["B", "0", "1", "2", "3", "4"].includes(matrix[i][a])) break;
-          if (matrix[a][j] == "E") contador++;
+          if (esBloque(matrix[i][a])) break;
+          if (matrix[i][a] == "E") contador++;
         }
+        console.log(+i + " " + j + "contador : " + contador);
         if (contador == 1) {
-          console.log("Deberia insertar en " + i + " " + j);
           for (var a = i - 1; a >= 0; a--) {
-            if (["B", "0", "1", "2", "3", "4"].includes(matrix[a][j])) break;
+            if (esBloque(matrix[a][j])) break;
             if (matrix[a][j] == "E") insertarBombilla(a, j);
           }
           for (var a = i + 1; a < matrix.length; a++) {
-            if (["B", "0", "1", "2", "3", "4"].includes(matrix[a][j])) break;
+            if (esBloque(matrix[a][j])) break;
             if (matrix[a][j] == "E") insertarBombilla(a, j);
           }
 
           for (var a = j - 1; a >= 0; a--) {
-            if (["B", "0", "1", "2", "3", "4"].includes(matrix[i][a])) break;
+            if (esBloque(matrix[i][a])) break;
             if (matrix[i][a] == "E") insertarBombilla(i, a);
           }
           for (var a = j + 1; a < matrix.length; a++) {
-            if (["B", "0", "1", "2", "3", "4"].includes(matrix[i][a])) break;
+            if (esBloque(matrix[i][a])) break;
             if (matrix[i][a] == "E") insertarBombilla(i, a);
           }
         }
@@ -410,8 +409,6 @@ function verificarReglaCuatro() {
 
 function insertarBombilla(i, j) {
   matrix[i][j] = "A";
-  console.log("Insertando en " + i + " " + j);
-  console.log(matrix);
   if (i == 0) {
     if (!["B", "0", "1", "2", "3", "4"].includes(matrix[i + 1][j])) {
       for (var a = i + 1; a < matrix.length; a++) {
@@ -472,22 +469,30 @@ function insertarBombilla(i, j) {
 }
 
 function escribirBombilla(i, j) {
-  console.log("Escribiendo en " + i + " " + j);
-  console.log(matrix[i][j]);
-  if (matrix[i][j] == "X") {
-    console.log("Si estoy escribiendo");
+  if (matrix[i][j] == "X" || matrix[i][j] == "XI") {
     matrix[i][j] = "XI";
   } else {
-    console.log("no estoy escrbieno");
     matrix[i][j] = "I";
   }
-  console.log(matrix);
 }
 
 function escribirX(i, j) {
-  if (matrix[i][j] == "I") {
+  if (matrix[i][j] == "I" || matrix[i][j] == "XI") {
     matrix[i][j] = "XI";
   } else {
     matrix[i][j] = "X";
   }
+}
+
+function esBloque(elemento) {
+  if (
+    elemento == "B" ||
+    elemento == "0" ||
+    elemento == "1" ||
+    elemento == "2" ||
+    elemento == "3" ||
+    elemento == "4"
+  )
+    return true;
+  return false;
 }

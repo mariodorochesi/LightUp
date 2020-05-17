@@ -18,29 +18,10 @@ regla 5: Si un espacio está vacío, no iluminado y todas los demás espacios en
 y columna están iluminados, son una pared o están bloqueados, entonces se coloca 
 una ampolleta en este espacio.
 
-if (["0", "1", "2", "3", "4"].includes(dato)) {
-        // Chequea si esta disponible el espacio sobre el bloque
-        try {
-          if (table.rows[i + 1].cells[j].innerHTML == "B") cantidad++;
-        } catch (error) {
-          console.log("error");
-        }
-        // Chequea si esta disponible el espacio  bajo el bloque
-        try {
-          if (table.rows[i - 1].cells[j].innerHTML == "B") cantidad++;
-        } catch (error) {}
-        // Chequea si esta disponible el espacio a la derecha del bloque
-        try {
-          if (table.rows[i].cells[j + 1].innerHTML == "B") cantidad++;
-        } catch (error) {}
-        try {
-          // Chequea si esta disponible el espacio a la izquiera del bloque
-          if (table.rows[i].cells[j - 1].innerHTML == "B") cantidad++;
-        } catch (error) {}
-        if (parseInt(dato) == cantidad) {
-          for (var a = i + 1, rowi; (rowi = table.rows[a]); a++) {
-            rowi.cells[j].style.backgroundColor = "yellow";
-            rowi.cells[j].innerHTML = "I";
-            rowi.cells[j].style.color = "yellow";
-          }
-        }
+0: (7) ["E", "E", "E", "2", "B", "0", "E"]
+1: (7) ["B", "E", "E", "I", "E", "E", "E"]
+2: (7) ["B", "E", "E", "I", "E", "E", "E"]
+3: (7) ["B", "E", "E", "I", "E", "E", "B"]
+4: (7) ["E", "E", "E", "I", "E", "E", "1"]
+5: (7) ["E", "E", "E", "I", "E", "E", "B"]
+6: (7) ["E", "0", "B", "1", "E", "E", "E"]
