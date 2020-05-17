@@ -1,0 +1,46 @@
+regla 1: Si el número en un cuadrado negro es igual a la cantidad de espacios 
+blancos disponibles adyacentes a este, entonces se inserta una ampolleta en cada uno 
+de estos.
+
+regla 2: Si la cantidad de ampolletas adyacentes a una pared es igual al número que tiene 
+dentro de esta, entonces el resto de espacios se llenan con una x, bloqueando la 
+posibilidad de colocar una ampolleta dentro de estos.
+
+regla 3: Si una pared contiene un 3, entonces se llenan con una x los 4 
+espacios diagonales a esta.
+
+regla 4: Si un espacio marcado con una x no está iluminado y sólo tiene disponible 
+un espacio (horizontal o vertical) para colocar una ampolleta, 
+en ese espacio se debe colocar una. Cabe destacar que la posición de este 
+espacio puede ser en cualquier distancia, pero no debe estar bloqueado por una pared.
+
+regla 5: Si un espacio está vacío, no iluminado y todas los demás espacios en su fila 
+y columna están iluminados, son una pared o están bloqueados, entonces se coloca 
+una ampolleta en este espacio.
+
+if (["0", "1", "2", "3", "4"].includes(dato)) {
+        // Chequea si esta disponible el espacio sobre el bloque
+        try {
+          if (table.rows[i + 1].cells[j].innerHTML == "B") cantidad++;
+        } catch (error) {
+          console.log("error");
+        }
+        // Chequea si esta disponible el espacio  bajo el bloque
+        try {
+          if (table.rows[i - 1].cells[j].innerHTML == "B") cantidad++;
+        } catch (error) {}
+        // Chequea si esta disponible el espacio a la derecha del bloque
+        try {
+          if (table.rows[i].cells[j + 1].innerHTML == "B") cantidad++;
+        } catch (error) {}
+        try {
+          // Chequea si esta disponible el espacio a la izquiera del bloque
+          if (table.rows[i].cells[j - 1].innerHTML == "B") cantidad++;
+        } catch (error) {}
+        if (parseInt(dato) == cantidad) {
+          for (var a = i + 1, rowi; (rowi = table.rows[a]); a++) {
+            rowi.cells[j].style.backgroundColor = "yellow";
+            rowi.cells[j].innerHTML = "I";
+            rowi.cells[j].style.color = "yellow";
+          }
+        }
