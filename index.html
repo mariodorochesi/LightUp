@@ -26,8 +26,8 @@
               <span>L</span>
               <span>i</span>
               <span>g</span>
-              <span>t</span>
               <span>h</span>
+              <span>t</span>
               <span>-</span>
               <span>U</span>
               <span>p</span>
@@ -54,6 +54,8 @@
             <button id = "reset-grid" type="button" class="create-grid" onclick="resetGrid()" style="display: none;">Reiniciar Grilla</button>
             <button id = "start-game" type="button" class="create-grid" onclick="startGame()" style="display: none;">Iniciar Solver</button>
             <table id="grid"></table>
+            <i id="left-arrow" class="fas fa-arrow-left" onclick="previousState()"></i>
+            <i id="right-arrow" class="fas fa-arrow-right" onclick="nextState()"></i>
             <div id ="selectors"class="selectors" style="display: none;">
                 <div class="selectors-content">
                   <span draggable="true" ondragstart="drag(event)" style="color: black;">B</span>

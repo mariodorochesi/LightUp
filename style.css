@@ -185,3 +185,21 @@ h1 span:nth-child(8) {
 #grid-size {
   display: flex;
 }
+
+#right-arrow {
+  font-size: 40px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: -20%;
+  color: green;
+}
+
+#left-arrow {
+  font-size: 40px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 108%;
+  color: green;
+}
